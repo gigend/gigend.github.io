@@ -3,11 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Website Saya</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <title>Gigend | Personal Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --text-color: #1f2937;
+            --light-color: #f9fafb;
+            --dark-color: #111827;
+            --gray-color: #6b7280;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,131 +22,238 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
         }
 
         header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px 0;
             text-align: center;
+            margin-bottom: 3rem;
         }
 
-        header h1 {
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
             font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
         }
 
-        nav ul {
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--gray-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
             display: flex;
             justify-content: center;
-            list-style-type: none;
-            margin-top: 20px;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
-        nav ul li {
-            margin: 0 15px;
+        .social-links a {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
         }
 
-        nav ul li a {
-            text-decoration: none;
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
             color: white;
-            font-weight: 600;
-            font-size: 1rem;
-            text-transform: uppercase;
-        }
-
-        nav ul li a:hover {
-            border-bottom: 2px solid #ffffff;
-            padding-bottom: 5px;
-        }
-
-        section.hero {
-            background-image: url('https://via.placeholder.com/1600x600');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-            padding: 100px 0;
-        }
-
-        section.hero h2 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        section.hero p {
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-        }
-
-        section.hero a {
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 25px;
-            text-decoration: none;
-            font-weight: 600;
+            padding: 0.8rem 1.5rem;
             border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            margin-top: 1rem;
         }
 
-        section.hero a:hover {
-            background-color: #45a049;
+        .btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 1.2rem;
+        }
+
+        .project-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-desc {
+            font-size: 0.9rem;
+            color: var(--gray-color);
+            margin-bottom: 1rem;
+        }
+
+        .project-link {
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
         }
 
         footer {
-            background-color: #333;
-            color: white;
             text-align: center;
-            padding: 20px 0;
-            margin-top: 50px;
+            padding: 2rem 0;
+            color: var(--gray-color);
+            font-size: 0.9rem;
         }
 
-        footer p {
-            font-size: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            header h1 {
+        @media (max-width: 600px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            h1 {
                 font-size: 2rem;
             }
-
-            nav ul {
-                flex-direction: column;
-            }
-
-            section.hero h2 {
-                font-size: 2rem;
-            }
-
-            section.hero p {
+            
+            .tagline {
                 font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Website Saya</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Beranda</a></li>
-                <li><a href="#">Tentang</a></li>
-                <li><a href="#">Layanan</a></li>
-                <li><a href="#">Kontak</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="container">
+        <header>
+            <!-- Ganti dengan foto profil Anda -->
+            <img src="https://via.placeholder.com/150" alt="Gigend" class="profile-img">
+            <h1>Gigend</h1>
+            <p class="tagline">Web Developer & Creative Designer</p>
+            
+            <div class="social-links">
+                <!-- Ganti dengan link sosial media Anda -->
+                <a href="https://github.com/gigend" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+        </header>
 
-    <section class="hero">
-        <h2>Selamat Datang di Website @gigend</h2>
-        <p>Temukan berbagai layanan menarik dan informasi terbaru di sini.</p>
-        <a href="#">Pelajari Lebih Lanjut</a>
-    </section>
+        <section id="about">
+            <h2>Tentang Saya</h2>
+            <p>Halo! Saya Gigend, seorang web developer dengan passion untuk menciptakan pengalaman digital yang menarik dan fungsional. Saya memiliki pengalaman dalam pengembangan front-end dan back-end, serta desain antarmuka pengguna.</p>
+            <p>Selain coding, saya menikmati fotografi, traveling, dan menjelajahi teknologi terbaru di dunia web development.</p>
+            <a href="#contact" class="btn">Hubungi Saya</a>
+        </section>
 
-    <footer>
-        <p>&copy; 2025 @gigend. Semua Hak Dilindungi.</p>
-    </footer>
+        <section id="projects">
+            <h2>Proyek Terbaru</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/300x150" alt="Proyek 1" class="project-img">
+                    <div class="project-info">
+                        <h3 class="project-title">Website Portofolio</h3>
+                        <p class="project-desc">Website portofolio untuk fotografer profesional dengan galeri interaktif.</p>
+                        <a href="#" class="project-link">Lihat Proyek →</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/300x150" alt="Proyek 2" class="project-img">
+                    <div class="project-info">
+                        <h3 class="project-title">Aplikasi Task Manager</h3>
+                        <p class="project-desc">Aplikasi manajemen tugas dengan fitur kolaborasi tim dan notifikasi.</p>
+                        <a href="#" class="project-link">Lihat Proyek →</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/300x150" alt="Proyek 3" class="project-img">
+                    <div class="project-info">
+                        <h3 class="project-title">Landing Page Produk</h3>
+                        <p class="project-desc">Landing page untuk produk teknologi dengan animasi interaktif.</p>
+                        <a href="#" class="project-link">Lihat Proyek →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Hubungi Saya</h2>
+            <p>Jika Anda tertarik untuk berkolaborasi atau sekedar menyapa, silakan hubungi saya melalui email atau media sosial.</p>
+            <p>Email: <a href="mailto:gigend@example.com">gigend@example.com</a></p>
+            <a href="mailto:gigend@example.com" class="btn">Kirim Pesan</a>
+        </section>
+
+        <footer>
+            <p>&copy; 2023 Gigend. All rights reserved.</p>
+        </footer>
+    </div>
 </body>
 </html>
