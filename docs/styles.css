@@ -1,112 +1,12 @@
-/* General Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-/* Body and Main Layout */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f7fb;
-    color: #333;
-    line-height: 1.6;
-}
-
-.container {
-    width: 80%;
-    margin: 0 auto;
-    max-width: 1200px;
-}
-
-/* Header */
-header {
-    background-color: #3498db;
-    color: white;
-    padding: 60px 0;
-    text-align: center;
-}
-
-header h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-}
-
-header p {
-    font-size: 1.2rem;
-    font-weight: 300;
-}
-
-/* About Section */
-.about {
-    padding: 40px 0;
-    background-color: #ffffff;
-    text-align: center;
-}
-
-.about h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-
-.about p {
-    font-size: 1.1rem;
-    color: #555;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-/* Projects Section */
-.projects {
-    padding: 40px 0;
-}
-
-.projects h2 {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 30px;
-}
-
-.project-list {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.project-card {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    width: 30%;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.project-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.project-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-.project-card p {
-    font-size: 1rem;
-    color: #777;
-}
-
-/* Footer */
-footer {
-    background-color: #2c3e50;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-}
-
-footer p {
-    font-size: 1rem;
-}
+        body { background-color: #121212; color: #fff; }
+        .card { background-color: #1e1e1e; color: #fff; border: none; }
+        .card img { border-radius: 10px; }
+        .sidebar { background-color: #1e1e1e; padding: 20px; border-radius: 10px; }
+        .popular-posts a { color: #fff; text-decoration: none; display: block; margin-bottom: 10px; }
+        .popular-posts a:hover { text-decoration: underline; }
+        .navbar { background-color: #1e1e1e; }
+        .navbar-brand { font-weight: bold; color: #fff; }
+        .search-bar input { background-color: #2a2a2a; border: none; color: #fff; }
+        .search-bar input::placeholder { color: #bbb; }
+        .footer { text-align: center; padding: 20px; background-color: #1e1e1e; margin-top: 20px; }
