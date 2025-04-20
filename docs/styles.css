@@ -86,7 +86,7 @@ h1 {
 }
 
 .subtitle {
-  font-size: 12px;
+  font-size: 13px;
   color: #242128;
   opacity: 0.8;
 }
@@ -175,7 +175,7 @@ footer {
   }
 
   h1 {
-    font-size: 45px;
+    font-size: 50px;
   }
 
   .navbar ul {
@@ -189,11 +189,15 @@ footer {
   }
 
   .navbar a {
-    font-size: 8px;
+    font-size: 10px;
   }
 
   h1 {
-    font-size: 40px;
+    font-size: 50px;
+  }
+
+  .subtitle {
+    font-size: 10px;
   }
 
   .buttons-container {
