@@ -164,9 +164,10 @@ footer {
   height: auto; /* Menjaga aspek rasio gambar tetap proporsional */
   transition: transform 0.3s ease;
 }
+
 .logo:hover {
   transform: scale(1.1);
-
+}
 /* Media Queries for Responsiveness */
 @media screen and (max-width: 768px) {
   .container {
