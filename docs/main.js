@@ -5,34 +5,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Add click event listener to each navigation link
   navLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-      // If the link is not the "home" link (which stays on the page)
-      if (!this.classList.contains('active')) {
-        // Prevent default only for demo purposes
-        // In a real site, you would let the link redirect normally
-        e.preventDefault();
+    link.addEventListener('click', function() {
+      // Remove active class from all links
+      navLinks.forEach(navLink => {
+        navLink.classList.remove('active');
+      });
 
-        // Remove active class from all links
-        navLinks.forEach(navLink => {
-          navLink.classList.remove('active');
-        });
-
-        // Add active class to the clicked link
-        this.classList.add('active');
-
-        // Show an alert for demo purposes
-        alert(`Navigating to ${this.textContent} is disabled in this demo.`);
-      }
+      // Add active class to the clicked link
+      this.classList.add('active');
+      // Biarkan browser melanjutkan navigasi normal
     });
   });
 
-  // Button hover effects (optional - already handled in CSS)
+  // Button click (biar tombol bisa jalan normal juga)
   const buttons = document.querySelectorAll('.button');
 
   buttons.forEach(button => {
-    button.addEventListener('click', function(e) {
-      e.preventDefault();
-      alert(`Navigating to ${this.textContent.trim()} is disabled in this demo.`);
+    button.addEventListener('click', function() {
+      // Tidak ada preventDefault, biar link berjalan normal
     });
   });
 });
