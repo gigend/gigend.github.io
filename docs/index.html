@@ -1,67 +1,77 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GIGEND / hello world</title>
-	
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gigend</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav class="navbar navbar-dark px-3">
-        <a class="navbar-brand" href="#">KAURUKA</a>
-        <form class="search-bar d-flex">
-            <input class="form-control me-2" type="search" placeholder="Sedang Cari Apa?">
-        </form>
+  <div class="container">
+    <!-- Navigation links -->
+    <nav class="navbar">
+      <ul>
+        <li><a href="https://gigend.github.io/" class="active">home</a></li>
+        <li><a href="https://facebook.com/gigend">facebook</a></li>
+        <li><a href="https://instagram.com/gigend">instagram</a></li>
+        <li><a href="https://twitter.com/gigend">twitter</a></li>
+        <li><a href="https://tiktok.com/@gigend">tiktok</a></li>
+        <li><a href="http://youtube.com/@gigend">youtube</a></li>
+      </ul>
     </nav>
-    
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="card mb-4">
-                    <img src="https://placehold.co/600x400" class="card-img-top" alt="Genshin Impact Update">
-                    <div class="card-body">
-                        <h5 class="card-title">Lorem ipsum dolor sit amet.</h5>
-                        <p class="card-text"><small class="text-muted">Feb 10 · Game</small></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card mb-4">
-                            <img src="https://placehold.co/600x400?text=Hello+World" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">Lorem ipsum dolor sit amet.</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card mb-4">
-                            <img src="https://placehold.co/600x400?text=Hello+World" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">Lorem ipsum dolor sit amet.</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="sidebar">
-                    <h5>Popular Posts</h5>
-                    <div class="popular-posts">
-                        <a href="#">Lorem ipsum dolor sit amet.</a>
-                        <a href="#">Lorem ipsum dolor sit amet.</a>
-                        <a href="#">Lorem ipsum dolor sit amet.</a>
-                        <a href="#">Lorem ipsum dolor sit amet.</a>
-                        <a href="#">Lorem ipsum dolor sit amet.</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+    <div class="divider"></div>
+
+    <!-- Header section -->
+    <header>
+      <h1><span class="highlight">Hello</span> World!</h1>
+      <p class="subtitle"><b>@gigend</b> / <i>an ordinary content creator, tries the best despite limitations</i></p>
+    </header>
+
+    <!-- YouTube video embed -->
+    <div class="video-container">
+      <iframe
+        src="https://www.youtube.com/embed/P-pg4sVOvXY"
+        title="Cupid / Fifty Fifty - Quartet Zeta, Kobo, Nahida, Ayaka - Keroncong"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
     </div>
-    <div class="footer">&copy; 2025 @gigend | Disclaimer | Privacy Policy</div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Social media buttons -->
+    <div class="buttons-container">
+      <a href="https://gigend.blogspot.com/" class="button">
+        <span class="icon">🏠</span> Blog
+      </a>
+      <a href="https://www.hoyolab.com/accountCenter?id=1018336" class="button">
+        <span class="icon">🎮</span> HoYoLAB
+      </a>
+      <a href="https://pixiv.me/gigend" class="button">
+        <span class="icon">🖼️</span> Pixiv
+      </a>
+      <a href="https://soundcloud.com/gigend" class="button">
+        <span class="icon">🔊</span> Soundcloud
+      </a>
+      <a href="https://sites.google.com/view/gigend/portfolio" class="button">Project Portfolio</a>
+      <a href="https://gigend.carrd.co/#price-list" class="button">Price List</a>
+      <a href="https://gigend.carrd.co/#support" class="button">Donation & Support</a>
+      <a href="https://sites.google.com/view/gigend/about" class="button">About</a>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="logo-container">
+        <a href="https://sites.google.com/view/gigend/" target="_blank">
+        <img src="assets/images/gigend-logo-small.png" alt="Logo" class="logo">
+        </a>
+      </div>
+      <p>&copy; 2025 Gigend. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
 </body>
 </html>
