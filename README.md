@@ -15,11 +15,12 @@ Website ini dibangun dengan HTML, CSS, dan JavaScript sederhana — untuk profil
 ├── index.html         -> Halaman utama
 ├── support.html       -> Halaman Support
 ├── pricelist.html     -> Halaman Price List
+├── favicon.icon       -> Favicon
 ├── main.js            -> JavaScript utama
 ├── styles.css         -> CSS utama
 └── assets/
     ├── fonts/         -> Font custom
-    └── images/        -> Gambar & favicon
+    └── images/        -> Gambar
 ```
 
 ---
@@ -34,9 +35,8 @@ Website ini dibangun dengan HTML, CSS, dan JavaScript sederhana — untuk profil
 
 ## 🎯 Catatan
 
-- Custom favicon bisa diletakkan di:  
-`docs/assets/images/favicon.ico`
 - Semua halaman tambahan (seperti Support, Price List) disimpan di dalam `docs/` agar bisa diakses dari web publik.
+- Akan terus di-update, agar lebih rapi dan terstruktur.
 
 ---
 

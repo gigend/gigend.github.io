@@ -1,0 +1,19 @@
+User-agent: Mediapartners-Google
+Disallow:
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: googlebot-image
+Allow: /
+
+User-agent: googlebot-mobile
+Allow: /
+
+User-agent: *
+Disallow: /search
+Disallow: /cgi-bin/
+
+Sitemap: https://gigend.github.io/sitemap.xml
+Sitemap: https://gigend.github.io/atom.xml?redirect=false&start-index=1&max-results=500
+Sitemap: https://gigend.github.io/rss.xml
