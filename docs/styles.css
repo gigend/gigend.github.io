@@ -132,6 +132,7 @@ body.dark a:hover {
 
 body.dark blockquote,
 body.dark pre,
+body.dark .portfolio-item,
 body.dark .centered-top,
 body.dark .centered-top-container,
 body.dark .sidebar-container,
@@ -140,7 +141,6 @@ body.dark .post-outer {
 }
 
 body.dark .project-card,
-body.dark .portfolio-item,
 body.dark .post,
 body.dark .post-wrapper {
   background-color: #343a40 !important;
@@ -398,11 +398,10 @@ p {
 /* Portfolio */
 .portfolio-item {
   margin-bottom: 20px;
-  background: white;
-  border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease;
+  padding: 1rem;
 }
 
 .portfolio-item:hover {
@@ -412,8 +411,9 @@ p {
 .portfolio-image {
   width: 100%;
   display: block;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: auto;
   object-fit: cover;
+  border-radius: 12px;
 }
 
 .portfolio-content {
@@ -520,7 +520,7 @@ footer {
   }
 
   .container {
-    padding: 1rem;
+    padding: 1rem 0;
   }
 
   h1 {
@@ -543,11 +543,12 @@ footer {
   .main-container {
     padding: 0rem;
   }
-
   .container {
-    padding: 1rem;
+    padding: 1rem 0;
   }
-
+  .video-container {
+    border-radius: 0px;
+  }
   .buttons-container {
     padding: 0 1rem;
   }
