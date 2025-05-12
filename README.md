@@ -21,6 +21,12 @@ Website ini dibangun dengan HTML, CSS, dan JavaScript sederhana — untuk profil
 └── assets/
     ├── fonts/         -> Font custom
     └── images/        -> Gambar
+└── pages/
+    ├── project-portfolio/ 
+        ├── index.html
+        ├── styles.css
+    ├── support/ 
+    ├── template/
 ```
 
 ---
@@ -35,10 +41,17 @@ Website ini dibangun dengan HTML, CSS, dan JavaScript sederhana — untuk profil
 
 ## 🎯 Catatan
 
-- Semua halaman tambahan (seperti Support, Price List) disimpan di dalam `docs/` agar bisa diakses dari web publik.
+- Semua halaman tambahan (seperti Support, Price List) disimpan di dalam `docs/pages` agar bisa diakses dari web publik.
 - Akan terus di-update, agar lebih rapi dan terstruktur.
 
----
+## 📝 To-Do List
+
+- [ ] Merapikan Icon / Solid Color Icon
+- [ ] Transisi Darkmode
+- [ ] Membuat Halaman `pages/support.html`
+- [ ] Membuat Halaman `pages/project-portfolio.html`
+- [ ] Membuat Halaman `pages/price-list.html`
+- [ ] Membuat Animasi Lazyload untuk `images` dan akan muncul setelah terlihat di layar (viewport)
 
 ## 👤 Author
 

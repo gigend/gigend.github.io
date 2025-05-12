@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gigend</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../../styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" async></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/css/lightgallery-bundle.min.css" />
+
 </head>
 
 <body>
   <div class="container">
 
+<!-- Navigation Bar -->
     <div class="navbar">
       <div class="dropdown">
           <a class="dropbtn">Menu <i class="fa-solid fa-caret-down caret-icon"></i></a>
@@ -46,62 +54,73 @@
       </div>
   </div>
 
-    <!-- Header section -->
-    <header>
-      <h1><span class="highlight">Hello</span> World!</h1>
-      <p class="subtitle"><b>@gigend</b> / <i>an ordinary content creator, tries the best despite limitations</i></p>
-    </header>
-
-    <div class="divider"></div>
-
-    <!-- YouTube video embed -->
-    <div class="video-container">
-      <iframe
-        src="https://www.youtube.com/embed/P-pg4sVOvXY"
-        title="Cupid / Fifty Fifty - Quartet Zeta, Kobo, Nahida, Ayaka - Keroncong"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
+  <header>
+    <!-- Ganti dengan foto profil -->
+    <img src="../../assets/images/gigend-avatar.png" alt="Gigend" class="profile-img">
+    <h1>Portfolio / Project</h1>
+    <p class="subtitle">@gigend</p>
+    
+    <div class="social-links">
+        <!-- Ganti dengan link sosial media -->
+        <a href="https://github.com/gigend" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://twitter.com/gigend" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="http://youtube.com/@gigend" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://instagram.com/gigend" target="_blank"><i class="fab fa-instagram"></i></a>
     </div>
+  </header>
 
-    <!-- External links
-    <nav class="external-links">
-      <ul>
-        <li><a href="https://gigend.github.io/">home</a></li>
-        <li><a href="https://facebook.com/gigend">facebook</a></li>
-        <li><a href="https://instagram.com/gigend">instagram</a></li>
-        <li><a href="https://twitter.com/gigend">twitter</a></li>
-        <li><a href="https://tiktok.com/@gigend">tiktok</a></li>
-        <li><a href="http://youtube.com/@gigend">youtube</a></li>
-      </ul>
-    </nav>   -->
+<!-- Main Section -->
 
-    <!-- Social media buttons -->
-    <div class="buttons-container">
-      <a href="https://gigend.blogspot.com/" class="button"><span class="icon">🏠</span> Blog</a>
-      <a href="https://www.hoyolab.com/accountCenter?id=1018336" class="button"><span class="icon">🎮</span> HoYoLAB</a>
-      <a href="https://pixiv.me/gigend" class="button"><span class="icon">🖼️</span> Pixiv</a>
-      <a href="https://soundcloud.com/gigend" class="button"><span class="icon">🔊</span> Soundcloud</a>
-      <a href="https://sites.google.com/view/gigend/portfolio" class="button">Project Portfolio</a>
-      <a href="https://gigend.carrd.co/#price-list" class="button">Price List</a>
-      <a href="https://gigend.carrd.co/#support" class="button">Donation & Support</a>
-      <a href="https://sites.google.com/view/gigend/about" class="button">About</a>
+    <!-- Portfolio Item -->
+    <div class="portfolio-item wow animate__animated animate__fadeInUp">
+      <img data-src="https://placehold.co/640x360" class="lazyload portfolio-image" alt="Project 1">
+      <div class="portfolio-content">
+        <h2 class="portfolio-title">Project Title 1</h2>
+        <p class="portfolio-description">Short description of your work or blog post. This can include tools used, outcomes,
+          or links.</p>
+      </div>
     </div>
+    
+    <!-- Portfolio Item -->
+    <div class="portfolio-item wow animate__animated animate__fadeInUp" data-wow-delay="">
+      <img data-src="https://placehold.co/640x360" class="lazyload portfolio-image" alt="Project 2">
+      <div class="portfolio-content">
+        <h2 class="portfolio-title">Project Title 2</h2>
+        <p class="portfolio-description">Another example entry. Feel free to change image source, title, and description.
+        </p>
+      </div>
+    </div>
+    
+    <!-- Portfolio Item / Image Only -->
+    <div id="single-gallery">
+      <div class="portfolio-item wow animate__animated animate__fadeInUp">
+        <img data-src="https://placehold.co/1280x720" class="lazyload portfolio-image" alt="Project 1">
+      </div>
+      <div class="portfolio-item wow animate__animated animate__fadeInUp">
+        <img data-src="https://placehold.co/1280x720" class="lazyload portfolio-image" alt="Project 2">
+      </div>
+      <!-- Tambah item lainnya -->
+    </div>    
 
-    <div class="divider"></div>
+<div class="divider"></div>
 
     <!-- Footer -->
     <footer>
       <div class="logo-container">
         <a href="https://sites.google.com/view/gigend/" target="_blank">
-        <img src="assets/images/gigend-logo-small.png" alt="Logo" class="logo">
+        <img src="../../assets/images/gigend-logo-small.png" alt="Logo" class="logo">
         </a>
       </div>
       <p>&copy; 2025 Gigend. All rights reserved.</p>
     </footer>
   </div>
 
-  <script src="main.js"></script>
+  <script src="../../main.js"></script>
+
+<!-- LightGallery JS -->
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/lightgallery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/rotate/lg-rotate.min.js"></script>
+
 </body>
 </html>
