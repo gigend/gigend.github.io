@@ -25,6 +25,8 @@
   box-sizing: border-box;
 }
 
+/* Main CSS */
+
 body {
   font-family: 'Segoe UI', sans-serif;
   background-color: #ecebeb;
@@ -581,3 +583,4 @@ footer {
     gap: 8px;
   }
 }
+
