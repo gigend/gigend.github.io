@@ -462,7 +462,14 @@ p {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.button:hover {
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    background-color: #1a1a1a;
+    transform: translateY(-2px);
+  }
+}
+
+.button.active-touch {
   background-color: #1a1a1a;
   transform: translateY(-2px);
 }
