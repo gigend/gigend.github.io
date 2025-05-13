@@ -126,6 +126,18 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// Hover Fix Mobile
+function detectTouchDevice() {
+  if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+    document.body.classList.add('no-hover');
+  } else {
+    document.body.classList.remove('no-hover');
+  }
+}
+
+window.addEventListener('DOMContentLoaded', detectTouchDevice);
+window.addEventListener('resize', detectTouchDevice); // Jika user colok mouse ke tablet misalnya
+
 // Reveal CSS animation as you scroll down a page
 new WOW().init();
 

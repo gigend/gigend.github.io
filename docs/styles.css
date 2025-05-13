@@ -384,6 +384,11 @@ p {
   background-color: var(--secondary-color);
 }
 
+body.no-hover .button:hover {
+  background-color: initial;
+  transform: none;
+}
+
 /* Video Container */
 .video-container {
   position: relative;
