@@ -1,44 +1,51 @@
-// Gacha - Feeling Lucky
-function feelingLucky() {
-  alert('Gacha konten sedang diproses...');
+function loadElement(id, file, callback) {
+  fetch(file)
+    .then(response => {
+      if (!response.ok) throw new Error(`Gagal load ${file}`);
+      return response.text();
+    })
+    .then(data => {
+      document.getElementById(id).innerHTML = data;
+      if (typeof callback === 'function') callback();
+    })
+    .catch(error => console.error(error));
 }
 
-function showLucky(root) {
-  var feed = root.feed;
-  var entries = feed.entry || [];
-  var entry = feed.entry[0];
-  for (var j = 0; j < entry.link.length; ++j) {
-    if (entry.link[j].rel == 'alternate') {
-      window.location = entry.link[j].href;
-    }
-  }
-}
+function initDropdownNavbar() {
+  let dropButtons = document.querySelectorAll('.dropbtn');
+  dropButtons.forEach((button) => {
+    button.addEventListener('click', function (event) {
+      event.preventDefault();
+      let dropdown = this.nextElementSibling;
+      let icon = this.querySelector('.caret-icon');
 
-function fetchLuck(luck) {
-  script = document.createElement('script');
-  script.src = 'https://gigend.blogspot.com/feeds/posts/summary?start-index=' + luck + '&max-results=1&alt=json-in-script&callback=showLucky';
-  script.type = 'text/javascript';
-  document.getElementsByTagName('head')[0].appendChild(script);
-}
+      document.querySelectorAll('.dropdown-content').forEach((d) => {
+        if (d !== dropdown) {
+          d.style.opacity = '0';
+          d.style.transform = 'translateY(-10px)';
+          setTimeout(() => (d.style.display = 'none'), 300);
 
-function readLucky(root) {
-  var feed = root.feed;
-  var total = parseInt(feed.openSearch$totalResults.$t, 10);
-  var luckyNumber = Math.floor(Math.random() * total);
-  luckyNumber++;
-  fetchLuck(luckyNumber);
-}
+          const otherIcon = d.previousElementSibling.querySelector('.caret-icon');
+          if (otherIcon) otherIcon.classList.remove('rotate');
+        }
+      });
 
-function feelingLucky() {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = 'https://gigend.blogspot.com/feeds/posts/summary?max-results=0&alt=json-in-script&callback=readLucky';
-  document.getElementsByTagName('head')[0].appendChild(script);
-}
+      if (dropdown.style.display === 'block') {
+        dropdown.style.opacity = '0';
+        dropdown.style.transform = 'translateY(-10px)';
+        setTimeout(() => (dropdown.style.display = 'none'), 300);
+        if (icon) icon.classList.remove('rotate');
+      } else {
+        dropdown.style.display = 'block';
+        setTimeout(() => {
+          dropdown.style.opacity = '1';
+          dropdown.style.transform = 'translateY(0)';
+        }, 10);
+        if (icon) icon.classList.add('rotate');
+      }
+    });
+  });
 
-// Script untuk Navbar
-document.addEventListener('DOMContentLoaded', function () {
-  // Tutup dropdown saat klik di luar
   document.addEventListener('click', function (event) {
     let dropdowns = document.querySelectorAll('.dropdown-content');
     dropdowns.forEach((dropdown) => {
@@ -52,62 +59,60 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
+}
 
-  let dropButtons = document.querySelectorAll('.dropbtn');
-  dropButtons.forEach((button) => {
-    button.addEventListener('click', function (event) {
-      event.preventDefault();
-      let dropdown = this.nextElementSibling;
-      let icon = this.querySelector('.caret-icon');
+function feelingLucky() {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = 'https://gigend.blogspot.com/feeds/posts/summary?max-results=0&alt=json-in-script&callback=readLucky';
+  document.getElementsByTagName('head')[0].appendChild(script);
+}
 
-      if (dropdown.style.display === 'block') {
-        // Tutup dropdown
-        dropdown.style.opacity = '0';
-        dropdown.style.transform = 'translateY(-10px)';
-        setTimeout(() => (dropdown.style.display = 'none'), 300);
+function readLucky(root) {
+  var feed = root.feed;
+  var total = parseInt(feed.openSearch$totalResults.$t, 10);
+  var luckyNumber = Math.floor(Math.random() * total);
+  luckyNumber++;
+  fetchLuck(luckyNumber);
+}
 
-        if (icon) icon.classList.remove('rotate');
-      } else {
-        // Tutup semua dropdown lain
-        document.querySelectorAll('.dropdown-content').forEach((d) => {
-          if (d !== dropdown) {
-            d.style.opacity = '0';
-            d.style.transform = 'translateY(-10px)';
-            setTimeout(() => (d.style.display = 'none'), 300);
+function fetchLuck(luck) {
+  script = document.createElement('script');
+  script.src = 'https://gigend.blogspot.com/feeds/posts/summary?start-index=' + luck + '&max-results=1&alt=json-in-script&callback=showLucky';
+  script.type = 'text/javascript';
+  document.getElementsByTagName('head')[0].appendChild(script);
+}
 
-            const otherIcon = d.previousElementSibling.querySelector('.caret-icon');
-            if (otherIcon) otherIcon.classList.remove('rotate');
-          }
-        });
+function showLucky(root) {
+  var entry = root.feed.entry[0];
+  for (var j = 0; j < entry.link.length; ++j) {
+    if (entry.link[j].rel == 'alternate') {
+      window.location = entry.link[j].href;
+    }
+  }
+}
 
-        // Buka dropdown sekarang
-        dropdown.style.display = 'block';
-        setTimeout(() => {
-          dropdown.style.opacity = '1';
-          dropdown.style.transform = 'translateY(0)';
-        }, 10);
-
-        if (icon) icon.classList.add('rotate');
-      }
-    });
-  });
-});
-
-// Dark Mode Script
 (function () {
   if (localStorage.getItem('darkMode') === 'enabled') {
     document.body.classList.add('dark');
   }
 
-  document.getElementById('darkModeToggleNav').addEventListener('click', function () {
-    document.body.classList.toggle('dark');
-    if (document.body.classList.contains('dark')) {
-      localStorage.setItem('darkMode', 'enabled');
-    } else {
-      localStorage.setItem('darkMode', 'disabled');
+  document.addEventListener("click", function (e) {
+    if (e.target.id === "darkModeToggleNav") {
+      document.body.classList.toggle("dark");
+      localStorage.setItem("darkMode", document.body.classList.contains("dark") ? "enabled" : "disabled");
     }
   });
 })();
+
+// Load modular element on DOMContentLoaded
+window.addEventListener("DOMContentLoaded", () => {
+  const isInPages = location.pathname.includes('/pages/');
+  const basePath = isInPages ? '../../' : './';
+
+  loadElement("navbar", basePath + "element/navbar.html", initDropdownNavbar);
+  loadElement("footer", basePath + "element/footer.html");
+});
 
 // Reveal CSS animation as you scroll down a page
 new WOW().init();

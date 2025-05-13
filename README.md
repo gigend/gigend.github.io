@@ -13,19 +13,18 @@ Website ini dibangun dengan HTML, CSS, dan JavaScript sederhana — untuk profil
 ```
 /docs
 ├── index.html         -> Halaman utama
-├── support.html       -> Halaman Support
-├── pricelist.html     -> Halaman Price List
 ├── favicon.icon       -> Favicon
 ├── main.js            -> JavaScript utama
 ├── styles.css         -> CSS utama
 └── assets/
     ├── fonts/         -> Font custom
     └── images/        -> Gambar
+└── element/
 └── pages/
-    ├── project-portfolio/ 
+    ├── portfolio/ 
         ├── index.html
         ├── styles.css
-    ├── support/ 
+    ├── support/        
     ├── template/
 ```
 
