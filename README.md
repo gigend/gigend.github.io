@@ -20,6 +20,8 @@ Website ini dibangun dengan HTML, CSS, dan JavaScript sederhana — untuk profil
     ├── fonts/         -> Font custom
     └── images/        -> Gambar
 └── element/
+    ├── footer.html
+    ├── navbar.html
 └── pages/
     ├── portfolio/ 
         ├── index.html

@@ -331,6 +331,11 @@ p {
   opacity: 0.8;
 }
 
+.image-caption {
+  text-align: center;
+  margin: -20px 0 10px 0;
+}
+
 .profile-img {
   width: 150px;
   height: 150px;
