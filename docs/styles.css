@@ -589,3 +589,14 @@ footer {
   }
 }
 
+@media (hover: none) and (pointer: coarse) {
+  .button:hover {
+    background-color: inherit;
+    transform: none;
+  }
+
+  .button:active {
+    background-color: #1a1a1a;
+    transform: translateY(-2px);
+  }
+}
