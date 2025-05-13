@@ -467,6 +467,11 @@ p {
   transform: translateY(-2px);
 }
 
+body.no-hover .button:hover {
+  background-color: inherit !important;
+  transform: none !important;
+}
+
 .button.active-touch {
   background-color: #1a1a1a;
   transform: translateY(-2px);

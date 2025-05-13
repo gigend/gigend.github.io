@@ -124,22 +124,27 @@ window.addEventListener("DOMContentLoaded", () => {
       logo.src = basePath + "assets/images/gigend-logo-small.png";
     }
   });
-});
 
-// Hover Fix Mobile
-document.querySelectorAll('.button').forEach(btn => {
-  const removeActive = () => btn.classList.remove('active-touch');
+  // ✅ Tambahkan class no-hover jika perangkat mendukung touch
+  if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+    document.body.classList.add('no-hover');
+  }
 
-  btn.addEventListener('touchstart', () => {
-    btn.classList.add('active-touch');
+  // ✅ Hover Fix Mobile
+  document.querySelectorAll('.button').forEach(btn => {
+    const removeActive = () => btn.classList.remove('active-touch');
+
+    btn.addEventListener('touchstart', () => {
+      btn.classList.add('active-touch');
+    });
+
+    btn.addEventListener('touchend', () => {
+      setTimeout(removeActive, 200); // efek feedback sebentar
+    });
+
+    btn.addEventListener('touchcancel', removeActive);
+    btn.addEventListener('touchmove', removeActive);
   });
-
-  btn.addEventListener('touchend', () => {
-    setTimeout(removeActive, 200); // efek feedback sebentar
-  });
-
-  btn.addEventListener('touchcancel', removeActive);
-  btn.addEventListener('touchmove', removeActive);
 });
 
 // Reveal CSS animation as you scroll down a page
