@@ -126,21 +126,16 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Hilangkan efek hover setelah sentuhan pada tombol selesai di perangkat mobile
-document.querySelectorAll('.buttons-container .button').forEach(button => {
-  button.addEventListener('touchstart', () => {
-    button.classList.add('active-touch');
+// Hover Fix Mobile
+document.querySelectorAll('.button').forEach(btn => {
+  btn.addEventListener('touchstart', () => {
+    btn.classList.add('active-touch');
   });
 
-  button.addEventListener('touchend', () => {
-    setTimeout(() => {
-      button.classList.remove('active-touch');
-    }, 200); // beri delay agar efek terlihat sebentar
+  btn.addEventListener('touchend', () => {
+    setTimeout(() => btn.classList.remove('active-touch'), 200);
   });
 });
-
-window.addEventListener('DOMContentLoaded', detectTouchDevice);
-window.addEventListener('resize', detectTouchDevice); // Jika user colok mouse ke tablet misalnya
 
 // Reveal CSS animation as you scroll down a page
 new WOW().init();
