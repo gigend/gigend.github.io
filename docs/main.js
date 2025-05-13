@@ -108,10 +108,22 @@ function showLucky(root) {
 // Load modular element on DOMContentLoaded
 window.addEventListener("DOMContentLoaded", () => {
   const isInPages = location.pathname.includes('/pages/');
-  const basePath = isInPages ? '../../' : './';
+  const isInDocs = location.pathname.includes('/docs/');
+  const isLocalFile = location.protocol === 'file:';
 
+  // Deteksi apakah sedang dibuka dari /docs/ atau root /
+  const basePath = isLocalFile || isInDocs ? '/docs/' : '/';
+
+  // Load navbar
   loadElement("navbar", basePath + "element/navbar.html", initDropdownNavbar);
-  loadElement("footer", basePath + "element/footer.html");
+
+  // Load footer dan isi logo-nya sesuai path
+  loadElement("footer", basePath + "element/footer.html", () => {
+    const logo = document.getElementById("footer-logo");
+    if (logo) {
+      logo.src = basePath + "assets/images/gigend-logo-small.png";
+    }
+  });
 });
 
 // Reveal CSS animation as you scroll down a page
