@@ -128,13 +128,18 @@ window.addEventListener("DOMContentLoaded", () => {
 
 // Hover Fix Mobile
 document.querySelectorAll('.button').forEach(btn => {
+  const removeActive = () => btn.classList.remove('active-touch');
+
   btn.addEventListener('touchstart', () => {
     btn.classList.add('active-touch');
   });
 
   btn.addEventListener('touchend', () => {
-    setTimeout(() => btn.classList.remove('active-touch'), 200);
+    setTimeout(removeActive, 200); // efek feedback sebentar
   });
+
+  btn.addEventListener('touchcancel', removeActive);
+  btn.addEventListener('touchmove', removeActive);
 });
 
 // Reveal CSS animation as you scroll down a page
