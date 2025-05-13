@@ -1,6 +1,3 @@
-// Prevent hover-stuck on mobile Safari & others
-document.addEventListener('touchstart', function() {}, true);
-
 function loadElement(id, file, callback) {
   fetch(file)
     .then(response => {
