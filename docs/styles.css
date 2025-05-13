@@ -384,11 +384,6 @@ p {
   background-color: var(--secondary-color);
 }
 
-body.no-hover .button:hover {
-  background-color: initial;
-  transform: none;
-}
-
 /* Video Container */
 .video-container {
   position: relative;
@@ -468,6 +463,11 @@ body.no-hover .button:hover {
 }
 
 .button:hover {
+  background-color: #1a1a1a;
+  transform: translateY(-2px);
+}
+
+.button.active-touch {
   background-color: #1a1a1a;
   transform: translateY(-2px);
 }

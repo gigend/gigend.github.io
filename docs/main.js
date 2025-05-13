@@ -126,14 +126,18 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Hover Fix Mobile
-function detectTouchDevice() {
-  if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-    document.body.classList.add('no-hover');
-  } else {
-    document.body.classList.remove('no-hover');
-  }
-}
+// Hilangkan efek hover setelah sentuhan pada tombol selesai di perangkat mobile
+document.querySelectorAll('.buttons-container .button').forEach(button => {
+  button.addEventListener('touchstart', () => {
+    button.classList.add('active-touch');
+  });
+
+  button.addEventListener('touchend', () => {
+    setTimeout(() => {
+      button.classList.remove('active-touch');
+    }, 200); // beri delay agar efek terlihat sebentar
+  });
+});
 
 window.addEventListener('DOMContentLoaded', detectTouchDevice);
 window.addEventListener('resize', detectTouchDevice); // Jika user colok mouse ke tablet misalnya
