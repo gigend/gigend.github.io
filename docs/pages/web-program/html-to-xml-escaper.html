@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gigend</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+
+  <style>
+    .html-container {
+      border: 1px solid #dee2e6;
+      min-height: 350px;
+      padding: 15px;
+      background-color: inherit;
+      transition: background-color 0.3s;
+    }
+    .row.equal-height {
+      display: flex;
+      align-items: stretch;
+    }
+    #markdown-input,
+    .textarea {
+      height: 350px;
+    }
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow-x: auto;
+      max-width: 100%;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .col-md-6, 
+    .pe-2 {
+    padding-right: inherit !important;
+    padding-top: .5rem;
+    }
+    .mt-4 {
+    margin-top: -1.5rem !important;
+    }
+
+  </style>
+
+<body>
+  <div class="container">
+
+    <div id="navbar"></div>
+    <div class="pages">
+    <!-- Header section -->
+    <header>
+      <h1><span class="highlight">HTML to XML</span> Escaper</h1>
+      <p class="subtitle"><b>@gigend</b> / Program ini berfungsi untuk mengubah kode HTML yang dimasukkan pengguna menjadi teks XML yang telah di-escape (menghindari karakter khusus), lalu memungkinkan hasilnya untuk disalin atau diunduh sebagai file <span class='format'>.xml</span>. Ini berguna untuk memastikan kompatibilitas saat menyisipkan HTML ke dalam dokumen XML atau sistem lain yang sensitif terhadap karakter khusus.</p>
+    </header>
+
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-6 pe-2">
+        <label for="html-input" class="form-label">Kode HTML</label>
+        <textarea id="html-input" class="form-control" rows="15" placeholder="Tulis kode HTML di sini..."></textarea>
+      </div>
+      <div class="col-md-6 ps-2">
+        <label for="xml-output" class="form-label">Hasil XML</label>
+        <div class="xml-container">
+          <div class="d-flex gap-2 mb-2">
+            <button id="copy-button" class="btn btn-secondary flex-fill" title="Copy XML">
+              <i class="bi bi-clipboard"></i> Copy
+            </button>
+            <button id="download-button" class="btn btn-info flex-fill" title="Download XML">
+              <i class="bi bi-download"></i> Download
+            </button>
+          </div>
+          <pre id="xml-output"></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    const htmlInput = document.getElementById('html-input');
+    const xmlOutput = document.getElementById('xml-output');
+    const copyButton = document.getElementById('copy-button');
+    const downloadButton = document.getElementById('download-button');
+
+    // Fungsi untuk mengubah karakter khusus HTML menjadi entitas XML
+    function escapeHTML(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/'/g, '&#39;')
+        .replace(/"/g, '&quot;');
+    }
+    
+    // Fungsi untuk mengkonversi HTML menjadi XML dengan escape karakter
+    function convertHTML() {
+      const inputText = htmlInput.value;
+      const escapedText = escapeHTML(inputText);
+      xmlOutput.textContent = escapedText;
+    }
+    
+    // Konversi setiap kali input berubah
+    htmlInput.addEventListener('input', convertHTML);
+    
+    // Fungsi untuk menyalin hasil XML ke clipboard
+    function copyXML() {
+      const xmlCode = xmlOutput.textContent;
+      navigator.clipboard.writeText(xmlCode)
+        .then(() => {
+          alert('XML berhasil dicopy!');
+        })
+        .catch((err) => {
+          console.error('Gagal menyalin XML:', err);
+        });
+    }
+    copyButton.addEventListener('click', copyXML);
+    
+    // Fungsi untuk mengunduh XML sebagai file .xml
+    function downloadXML() {
+      const xmlCode = xmlOutput.textContent;
+      const blob = new Blob([xmlCode], { type: 'text/xml' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'hasil.xml';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+    downloadButton.addEventListener('click', downloadXML);
+    </script>
+
+<div class="divider"></div>
+
+<div id="footer"></div>
+
+</div>
+
+<script src="../../main.js"></script>
+
+</body>
+
+</html>

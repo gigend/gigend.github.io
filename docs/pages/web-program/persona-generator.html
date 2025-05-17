@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gigend</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+
+  <style>
+    .card {
+      margin: 50px auto;
+      max-width: 600px;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: background-color 0.3s, color 0.3s;
+    }
+    /* Tombol Generate Persona dengan efek klik */
+    .btn-custom {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      transition: background-color 0.3s, box-shadow 0.3s, transform 0.1s;
+    }
+    .btn-custom:hover {
+      background-color: #0056b3 !important;
+      color: #fff !important;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .btn-custom:active {
+      transform: scale(0.97);
+    }
+    /* Animasi fade in & scale dari tengah untuk hasil generate */
+    .fade-in {
+      animation: fadeInCenter 0.6s ease-out;
+    }
+    @keyframes fadeInCenter {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+     /* Gaya untuk avatar */
+     #avatar {
+    max-width: 150px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+  </style>
+
+<body>
+  <div class="container">
+
+    <div id="navbar"></div>
+    <div class="pages">
+    <!-- Header section -->
+    <header>
+      <h1><span class="highlight">Persona</span> Generator</h1>
+      <p class="subtitle"><b>@gigend</b> / Program ini adalah generator deskripsi karakter (persona) berbasis web yang secara acak membuat nama, tampilan fisik, dan sifat karakter berdasarkan input pengguna atau pilihan acak, lengkap dengan avatar ilustratif. Program ini juga menyediakan fitur untuk menyalin, membagikan, dan menyimpan hasil deskripsi yang dihasilkan.</p>
+    </header>
+
+
+
+      <form id="personaForm">
+        <!-- Input Nama -->
+        <div class="mb-3">
+          <label for="name" class="form-label">Nama (Opsional)</label>
+          <input type="text" class="form-control" id="name" placeholder="Contoh: Agung, Siti, Budi...">
+        </div>
+        <!-- Input Tampilan -->
+        <div class="mb-3">
+          <label for="appearance" class="form-label">Tampilan (Opsional)</label>
+          <input type="text" class="form-control" id="appearance" placeholder="Contoh: rambut hitam, mata biru, tinggi">
+        </div>
+        <!-- Input Sifat -->
+        <div class="mb-3">
+          <label for="personality" class="form-label">Sifat (Opsional)</label>
+          <input type="text" class="form-control" id="personality" placeholder="Contoh: ramah, petualang, humoris">
+        </div>
+        <!-- Checkbox untuk menambahkan sifat negatif -->
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" id="includeBadTraits">
+          <label class="form-check-label" for="includeBadTraits">
+            Tambahkan sifat negatif
+          </label>
+        </div>
+        <div class="text-center">
+          <button type="button" class="btn btn-custom px-4" onclick="generatePersona()">Generate Persona</button>
+        </div>
+      </form>
+      <hr>
+      <!-- Avatar yang dihasilkan secara dinamis -->
+        <div class="text-center mb-3" id="avatarContainer">
+          <img id="avatar" src="https://placehold.co/400x400?text=Hello+World" alt="Avatar">
+        </div>
+      <!-- Hasil output deskripsi persona -->
+      <div id="result" class="mt-3"></div>
+      <!-- Tombol-tombol aksi: Copy, Share, Save -->
+      <div class="d-flex justify-content-center align-items-center gap-3 mt-3">
+        <button id="copyButton" class="btn btn-outline-secondary btn-sm" onclick="copyResult()">
+          <i class="bi bi-clipboard"></i> Copy
+        </button>
+        <button id="shareButton" class="btn btn-outline-secondary btn-sm" onclick="shareResult()">
+          <i class="bi bi-share"></i> Share
+        </button>
+        <button id="saveButton" class="btn btn-outline-secondary btn-sm" onclick="saveResult()">
+          <i class="bi bi-download"></i> Save
+        </button>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Fungsi untuk mengambil elemen acak dari sebuah array
+      function getRandomItem(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
+  
+      // Fungsi untuk mengocok array (Fisher-Yates Shuffle)
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+  
+      // Array untuk generate Nama secara acak
+      const names = [
+        "Agung", "Siti", "Budi", "Dewi", "Joko", "Rina", "Andi", "Fitri", 
+        "Dedi", "Wulan", "Yanti", "Slamet", "Rizki", "Putri", "Rifki", "Nina",
+        "Adi", "Lia", "Rama", "Tia", "Iwan", "Sari", "Reno", "Teguh", "Maya"
+      ];
+  
+      // Array untuk generate Tampilan
+      const appearanceTraits = [
+        "rambut hitam", "rambut coklat", "rambut pirang", "rambut merah",
+        "mata biru", "mata coklat", "kulit sawo matang", "kulit pucat",
+        "tinggi", "pendek", "berpakaian formal", "berpakaian santai",
+        "berkacamata", "berjanggut", "berambut ikal", "berambut lurus",
+        "bergaya modern", "berpenampilan rapi", "gaya vintage", "ekskentrik"
+      ];
+  
+      // Array untuk sifat (Traits) positif yang lebih variatif
+      const traitsEveryday = ["pendiam", "sederhana", "tenang", "lugas", "praktis", "realistis", "organisir", "teratur"];
+      const traitsIntellectual = ["cerdas", "penuh wawasan", "reflektif", "analitis", "inovatif", "logis", "pintar", "berpengetahuan luas"];
+      const traitsSocial = ["ramah", "penyayang", "pengertian", "bersahabat", "komunikatif", "humoris", "penuh empati", "supel", "dermawan"];
+      const traitsArtistic = ["kreatif", "imajinatif", "ekspresif", "visioner", "artistik", "puitis", "estetis", "inovatif"];
+      const traitsUnusual = ["eksentrik", "misterius", "unik", "aneh", "quirky", "nonkonvensional", "mistis", "eksperimental"];
+      const traitsExtreme = ["radikal", "berani mengambil risiko", "revolusioner", "ekstrem", "berani", "avant-garde", "provokatif", "tak terduga"];
+  
+      // Array untuk sifat negatif
+      const badTraits = [
+        "pemarah", "egois", "malas", "sombong", "pembohong",
+        "sinis", "dangkal", "tak bertanggung jawab", "manja", "serakah", "kurang sabar"
+      ];
+  
+      function generatePersona() {
+        // Ambil nilai input
+        const nameInput = document.getElementById('name').value.trim();
+        const appearanceInput = document.getElementById('appearance').value.trim();
+        const personalityInput = document.getElementById('personality').value.trim();
+        const includeBad = document.getElementById('includeBadTraits').checked;
+  
+        const nameDesc = nameInput || getRandomItem(names);
+        const appearanceDesc = appearanceInput || `${getRandomItem(appearanceTraits)} dan ${getRandomItem(appearanceTraits)}`;
+  
+        let personalityDesc;
+        if (personalityInput) {
+          personalityDesc = personalityInput;
+        } else {
+          // Ambil satu trait dari masing-masing kategori dan acak urutannya
+          const selectedTraits = [
+            getRandomItem(traitsEveryday),
+            getRandomItem(traitsIntellectual),
+            getRandomItem(traitsSocial),
+            getRandomItem(traitsArtistic),
+            getRandomItem(traitsUnusual),
+            getRandomItem(traitsExtreme)
+          ];
+          personalityDesc = shuffle(selectedTraits).join(", ");
+        }
+        
+        // Jika checkbox untuk sifat negatif dicentang, tambahkan dua sifat negatif secara acak
+        if (includeBad) {
+          const selectedBadTraits = shuffle([...badTraits]).slice(0, 2);
+          personalityDesc += ", " + selectedBadTraits.join(", ");
+        }
+  
+        // Susun deskripsi persona
+        const resultHTML = `
+          <h4>Deskripsi Persona</h4>
+          <p><strong>Nama:</strong> ${nameDesc}</p>
+          <p><strong>Tampilan:</strong> ${appearanceDesc}.</p>
+          <p><strong>Sifat:</strong> ${personalityDesc}.</p>
+        `;
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = resultHTML;
+        // Terapkan animasi fade in & scale dari tengah
+        resultDiv.classList.remove('fade-in');
+        void resultDiv.offsetWidth; // Trigger reflow untuk restart animasi
+        resultDiv.classList.add('fade-in');
+  
+        // Update avatar menggunakan DiceBear API versi terbaru dengan gaya "avataaars"
+        document.getElementById('avatar').src = "https://api.dicebear.com/9.x/avataaars/svg?seed=" + encodeURIComponent(nameDesc);
+      }
+  
+      // Fungsi untuk menyalin hasil ke clipboard
+      function copyResult() {
+        const resultText = document.getElementById('result').innerText;
+        if (!resultText) return;
+        navigator.clipboard.writeText(resultText)
+          .then(() => {
+            const copyBtn = document.getElementById('copyButton');
+            copyBtn.innerHTML = `<i class="bi bi-clipboard-check"></i> Copied!`;
+            setTimeout(() => { copyBtn.innerHTML = `<i class="bi bi-clipboard"></i> Copy`; }, 2000);
+          })
+          .catch(err => {
+            console.error("Gagal menyalin teks: ", err);
+          });
+      }
+  
+      // Fungsi untuk berbagi hasil menggunakan Web Share API (jika tersedia)
+      function shareResult() {
+        const resultText = document.getElementById('result').innerText;
+        if (!resultText) return;
+        if (navigator.share) {
+          navigator.share({
+            title: 'Deskripsi Persona',
+            text: resultText
+          })
+          .then(() => console.log('Berhasil berbagi'))
+          .catch((error) => console.error('Gagal berbagi', error));
+        } else {
+          alert("Fitur berbagi tidak didukung di browser ini. Pastikan Anda menggunakan perangkat atau koneksi HTTPS yang mendukung Web Share API.");
+        }
+      }
+  
+      // Fungsi untuk menyimpan dan mendownload deskripsi persona sebagai file teks
+      function saveResult() {
+        const resultText = document.getElementById('result').innerText;
+        if (!resultText) return;
+        const blob = new Blob([resultText], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'deskripsi_persona.txt';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+  
+      // Fitur Dark Mode Toggle
+      const darkModeToggle = document.getElementById('darkModeToggle');
+      darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+      });
+    </script>
+
+<div class="divider"></div>
+
+<div id="footer"></div>
+
+</div>
+
+<script src="../../main.js"></script>
+
+</body>
+
+</html>

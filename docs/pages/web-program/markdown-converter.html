@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gigend</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+
+  <style>
+    .html-container {
+      border: 1px solid #dee2e6;
+      min-height: 350px;
+      padding: 15px;
+      background-color: inherit;
+      transition: background-color 0.3s;
+    }
+    .row.equal-height {
+      display: flex;
+      align-items: stretch;
+    }
+    #markdown-input,
+    .textarea {
+      height: 350px;
+    }
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow-x: auto;
+      max-width: 100%;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 8px;
+      padding: 10px;
+    }
+    .col-md-6, 
+    .pe-2 {
+    padding-right: inherit !important;
+    padding-top: .5rem;
+    }
+    .mt-4 {
+    margin-top: -1.5rem !important;
+    }
+  </style>
+
+<body>
+  <div class="container">
+
+    <div id="navbar"></div>
+    <div class="pages">
+    <!-- Header section -->
+    <header>
+      <h1><span class="highlight">Markdown to HTML</span> Converter</h1>
+      <p class="subtitle"><b>@gigend</b> / Program HTML ini adalah aplikasi web sederhana yang memungkinkan pengguna mengonversi teks Markdown ke HTML secara real-time, serta menyediakan fitur untuk menyalin atau mengunduh hasil konversi tersebut.</p>
+    </header>
+
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-md-6 pe-2">
+          <label for="markdown-input" class="form-label">Teks Markdown</label>
+          <textarea id="markdown-input" class="form-control" rows="15" placeholder="Tulis Markdown di sini..."></textarea>
+        </div>
+        <div class="col-md-6 ps-2">
+          <label for="html-output" class="form-label">Hasil HTML</label>
+          <div class="html-container">
+            <div class="d-flex gap-2 mb-2">
+              <button id="copy-button" class="btn btn-secondary flex-fill" title="Copy HTML">
+                <i class="bi bi-clipboard"></i> Copy
+              </button>
+              <button id="download-button" class="btn btn-info flex-fill" title="Download HTML">
+                <i class="bi bi-download"></i> Download
+              </button>
+            </div>
+            <div id="html-output"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const markdownInput = document.getElementById('markdown-input');
+      const htmlOutput = document.getElementById('html-output');
+      const copyButton = document.getElementById('copy-button');
+      const downloadButton = document.getElementById('download-button');
+      const toggleDarkMode = document.getElementById('toggle-dark-mode');
+      
+      function convertMarkdown() {
+        const markdownText = markdownInput.value;
+        const convertedHtml = marked.parse(markdownText);
+        htmlOutput.innerHTML = convertedHtml;
+      }
+      
+      markdownInput.addEventListener('input', convertMarkdown);
+      
+      function copyHtml() {
+        const htmlCode = htmlOutput.innerHTML;
+        navigator.clipboard.writeText(htmlCode)
+          .then(() => {
+            alert('HTML berhasil dicopy!');
+          })
+          .catch((err) => {
+            console.error('Gagal menyalin HTML:', err);
+          });
+      }
+      copyButton.addEventListener('click', copyHtml);
+      
+      function downloadHtml() {
+        const htmlCode = htmlOutput.innerHTML;
+        const blob = new Blob([htmlCode], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'hasil.html';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+      downloadButton.addEventListener('click', downloadHtml);
+    </script>
+
+<div class="divider"></div>
+
+<div id="footer"></div>
+
+</div>
+
+<script src="../../main.js"></script>
+
+</body>
+
+</html>

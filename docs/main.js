@@ -11,6 +11,7 @@ function loadElement(id, file, callback) {
     .catch(error => console.error(error));
 }
 
+// Navbar Dropdown
 function initDropdownNavbar() {
   let dropButtons = document.querySelectorAll('.dropbtn');
   dropButtons.forEach((button) => {
@@ -61,6 +62,43 @@ function initDropdownNavbar() {
   });
 }
 
+// Submenu Dropdown
+function initAllDropdownButtons() {
+  const triggers = document.querySelectorAll('.dropdown-trigger');
+
+  triggers.forEach((trigger) => {
+    const submenu = trigger.nextElementSibling;
+    const caret = trigger.querySelector('.caret-icon');
+
+    trigger.addEventListener('click', () => {
+      const isVisible = submenu.classList.contains('show');
+
+      // Tutup semua yang lain
+      document.querySelectorAll('.sub-buttons').forEach(el => el.classList.remove('show'));
+      document.querySelectorAll('.dropdown-trigger .caret-icon').forEach(i => i.classList.remove('rotate'));
+
+      if (!isVisible) {
+        submenu.classList.add('show');
+        if (caret) caret.classList.add('rotate');
+      }
+    });
+  });
+
+  // Klik di luar = tutup semua
+  document.addEventListener('click', (e) => {
+    triggers.forEach(trigger => {
+      const submenu = trigger.nextElementSibling;
+      const caret = trigger.querySelector('.caret-icon');
+
+      if (!trigger.contains(e.target) && !submenu.contains(e.target)) {
+        submenu.classList.remove('show');
+        if (caret) caret.classList.remove('rotate');
+      }
+    });
+  });
+}
+
+// Gacha
 function feelingLucky() {
   var script = document.createElement('script');
   script.type = 'text/javascript';
@@ -92,6 +130,7 @@ function showLucky(root) {
   }
 }
 
+// Dark Mode
 (function () {
   if (localStorage.getItem('darkMode') === 'enabled') {
     document.body.classList.add('dark');
@@ -115,7 +154,10 @@ window.addEventListener("DOMContentLoaded", () => {
   const basePath = isLocalFile || isInDocs ? '/docs/' : '/';
 
   // Load navbar
-  loadElement("navbar", basePath + "element/navbar.html", initDropdownNavbar);
+  loadElement("navbar", basePath + "element/navbar.html", () => {
+    initDropdownNavbar();       // navbar dropdown
+    initAllDropdownButtons(); // <- fungsi general baru
+  });
 
   // Load footer dan isi logo-nya sesuai path
   loadElement("footer", basePath + "element/footer.html", () => {
