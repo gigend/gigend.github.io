@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anime Prompt Generator</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="stylesheet" href="../../styles.css">
+  <style>
+    body {
+      background: #f3f4f6;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .card {
+      border-radius: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    textarea {
+      font-family: monospace;
+    }
+
+    .lock-toggle {
+      cursor: pointer;
+      margin-right: 6px;
+    }
+
+    .form-label-wrapper {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.3rem;
+    }
+
+    .py-5 {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+}
+
+    @media (min-width: 768px) {
+    .col-md-10 {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+}
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <div id="navbar"></div>
+    <div class="pages">
+    <!-- Header section -->
+    <header>
+      <h1><span class="highlight">Waifu</span> Prompt Generator</h1>
+      <p class="subtitle"><b>@gigend</b> / Program ini adalah generator prompt visual berbasis web yang membantu pengguna membuat deskripsi gambar anime-style (seperti waifu) untuk keperluan AI art. Pengguna dapat mengisi atau mengacak elemen seperti karakter, pose, pakaian, latar, dan gaya visual, lalu menghasilkan prompt teks beserta prompt negatif untuk digunakan di AI image generator.
+      </p>
+    </header>
+
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+
+          <div class="row g-3">
+
+            <!-- FIELD -->
+            <div class="col-md-4">
+              <div class="form-label-wrapper">
+                <i class="bi bi-unlock-fill lock-toggle" id="lock-character" onclick="toggleLock('character')"></i>
+                <label class="form-label">Character</label>
+              </div>
+              <input type="text" class="form-control" id="character" />
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-label-wrapper">
+                <i class="bi bi-unlock-fill lock-toggle" id="lock-pose" onclick="toggleLock('pose')"></i>
+                <label class="form-label">Pose / Expression</label>
+              </div>
+              <input type="text" class="form-control" id="pose" />
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-label-wrapper">
+                <i class="bi bi-unlock-fill lock-toggle" id="lock-outfit" onclick="toggleLock('outfit')"></i>
+                <label class="form-label">Outfit</label>
+              </div>
+              <input type="text" class="form-control" id="outfit" />
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-label-wrapper">
+                <i class="bi bi-unlock-fill lock-toggle" id="lock-scene" onclick="toggleLock('scene')"></i>
+                <label class="form-label">Scene / Background</label>
+              </div>
+              <input type="text" class="form-control" id="scene" />
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-label-wrapper">
+                <i class="bi bi-unlock-fill lock-toggle" id="lock-style" onclick="toggleLock('style')"></i>
+                <label class="form-label">Style & Lighting</label>
+              </div>
+              <input type="text" class="form-control" id="style" />
+            </div>
+
+            <div class="col-md-6 d-flex flex-column justify-content-end">
+              <div class="form-check form-switch mb-1">
+                <input class="form-check-input" type="checkbox" id="toggleAngle" checked onchange="toggleAngleSelect()" />
+                <label class="form-check-label" for="toggleAngle">Camera Angle</label>
+              </div>
+              <select class="form-select mt-auto" id="angle">
+                <option value="">Select angle...</option>
+                <option>low angle</option>
+                <option>top-down</option>
+                <option>close-up</option>
+                <option>over-the-shoulder</option>
+                <option>first-person POV</option>
+                <option>tilted angle</option>
+                <option>extreme wide shot</option>
+                <option>drone shot</option>
+                <option>worm’s-eye view</option>
+              </select>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-label-wrapper">
+                <i class="bi bi-unlock-fill lock-toggle" id="lock-quality" onclick="toggleLock('quality')"></i>
+                <label class="form-label">Quality Tags</label>
+              </div>
+              <input type="text" class="form-control" id="quality" />
+            </div>
+
+            <div class="col-12">
+              <div class="form-label-wrapper">
+                <i class="bi bi-unlock-fill lock-toggle" id="lock-negative" onclick="toggleLock('negative')"></i>
+                <label class="form-label">Negative Prompt</label>
+              </div>
+              <input type="text" class="form-control" id="negative" />
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Preset Style</label>
+              <select class="form-select" id="preset" onchange="applyPreset()">
+                <option value="">Custom / None</option>
+                <option value="Ghibli-like fantasy">Ghibli-like fantasy</option>
+                <option value="Dark Cyberpunk">Dark Cyberpunk</option>
+                <option value="Retro 90s Anime">Retro 90s Anime</option>
+                <option value="Dreamy Pastel">Dreamy Pastel</option>
+                <option value="Magical Girl Dream">Magical Girl Dream</option>
+                <option value="Rainy Romance">Rainy Romance</option>
+                <option value="Sakura Festival">Sakura Festival</option>
+                <option value="Yandere Love">Yandere Love</option>
+                <option value="Virtual Idol Stage">Virtual Idol Stage</option>
+                <option value="Gothic Elegance">Gothic Elegance</option>
+                <option value="Cozy Slice of Life">Cozy Slice of Life</option>
+                <option value="Celestial Waifu">Celestial Waifu</option>
+                <option value="Snowy Serenity">Snowy Serenity</option>
+              </select>
+            </div>
+
+            <div class="col-12 text-center">
+
+              <button class="btn btn-secondary mt-3 me-2" onclick="randomPrompt()"><i class="bi bi-shuffle"></i> Random Generate</button>
+              <button class="btn btn-primary mt-3 me-2" onclick="generatePrompt()"><i class="bi bi-magic"></i> Generate Prompt</button>
+              <button class="btn btn-outline-success mt-3" onclick="copyPrompt()"><i class="bi bi-clipboard"></i> Copy Prompt</button>
+            </div>
+
+            <div class="col-12">
+              <label class="form-label mt-4">Generated Prompt</label>
+              <textarea class="form-control" id="output" rows="4" readonly></textarea>
+            </div>
+            <div class="col-12">
+              <label class="form-label mt-3">Negative Prompt Output</label>
+              <textarea class="form-control" id="negativeOutput" rows="2" readonly></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const libraries = {
+      character: [
+        "cute anime girl", "fox spirit with nine tails", "dragon maid", "virtual idol",
+        "catgirl hacker", "mermaid warrior", "oni girl in yukata", "ghost in school uniform",
+        "magical girl with wand", "gothic lolita vampire", "android waifu", "tsundere class president",
+        "mysterious shrine maiden", "bunny girl waitress", "maid with battle armor", "flower fairy",
+        "alien princess", "cyberpunk idol", "witch with oversized hat", "sunset-haired yandere",
+        "beastgirl ranger", "snow elf with ice magic", "cyber shrine maiden", "kunoichi with dual blades",
+        "space pirate waifu", "high elf noble", "moe scientist", "sports ace senpai",
+        "angelic guardian", "punk rocker magical girl"
+      ],
+
+      pose: [
+        "smiling", "peace sign", "running with toast", "mid-air spin",
+        "blowing kiss", "winking with hand on hip", "crossed arms tsundere pose",
+        "kneeling with soft smile", "resting chin on hand", "playing with hair",
+        "holding plushie", "sipping tea", "lying in bed sideways", "sitting with knees up",
+        "leaping from rooftop", "hugging knees", "posing with heart shape hands",
+        "standing back to back with twin", "gazing longingly", "reaching toward camera"
+      ],
+
+      outfit: [
+        "idol stage costume", "school uniform with cardigan", "futuristic armor bodysuit",
+        "maid dress with frills", "kimono with floral patterns", "gothic lolita dress",
+        "bunny girl outfit", "witch robes with ribbon", "casual streetwear", "cute pajamas",
+        "magical girl outfit", "cheerleader uniform", "sundress with straw hat", "cyberpunk hoodie",
+        "sailor uniform", "vintage Victorian dress", "festival yukata", "sci-fi bodysuit",
+        "ribbon-laced battle armor", "oversized sweater and thigh highs"
+      ],
+
+      scene: [
+        "on school rooftop at sunset", "under cherry blossom tree", "at summer festival",
+        "on a floating sakura island", "in a cozy bedroom", "inside a magical academy library",
+        "on a rainy street under umbrella", "inside an idol dressing room", "at a seaside train station",
+        "on a ferris wheel at night", "inside a futuristic cityscape", "midair in a starry night sky",
+        "on a dreamy pastel bridge", "walking in a snow-covered forest", "tea party in a garden",
+        "standing in a battlefield with petals flying", "in a bathhouse with steamy atmosphere",
+        "at a shrine during lantern festival", "in a bubble-filled underwater cave"
+      ],
+
+      style: [
+        "cel-shaded anime", "pastel dream", "shimmering bokeh lights", "soft watercolor tones",
+        "high detail anime art", "vintage 90s anime", "sparkling magical aura", "vibrant shojo palette",
+        "romantic glow effect", "light bloom with soft gradients", "clean lineart style",
+        "sparkle-dusted fantasy style", "ethereal light leaks", "AI-anime aesthetic", "dreamy haze filter"
+      ],
+
+      angle: [
+          "low angle", "top-down", "close-up", "over-the-shoulder", "first-person POV", "tilted angle", "extreme wide shot", "drone shot", "worm’s-eye view"
+        ],
+
+      quality: [
+        "masterpiece", "best quality", "8k resolution", "soft cinematic glow",
+        "ultra detailed eyes", "perfect lighting", "anime screencap quality",
+        "trending Pixiv illustration", "photo-real anime fusion", "award-winning fanart style"
+      ]
+    };
+
+    const presets = {
+      "Ghibli-like Fantasy": "Ghibli-like background, fantasy setting, soft tones, magical ambience",
+      "Dark Cyberpunk": "cyberpunk alley, neon lights, dark shadows, glowing tech elements",
+      "Retro 90s Anime": "cel-shading, grainy texture, classic anime style, warm color grading",
+      "Dreamy Pastel": "pastel color palette, soft glow, floating sparkles, kawaii atmosphere",
+      "Magical Girl Dream": "sparkly transformation background, glowing ribbons, magical aura",
+      "Rainy Romance": "soft rain, umbrella reflections, city lights blur, romantic tension",
+      "Sakura Festival": "falling cherry blossoms, lanterns, night festival stalls",
+      "Yandere Love": "pink-lit room, eyes glowing slightly, unsettling smile, red petals floating",
+      "Virtual Idol Stage": "bright LED background, dynamic spotlighting, vibrant digital effects",
+      "Gothic Elegance": "gothic cathedral interior, rose petals, chandelier glow, baroque patterns",
+      "Cozy Slice of Life": "warm indoor lighting, kotatsu table, casual setting, lazy afternoon vibes",
+      "Celestial Waifu": "starscape background, space ribbons, floating gently, cosmic colors",
+      "Snowy Serenity": "snow-covered shrine, foggy breath, tranquil silence, soft blue palette"
+    };
+
+    function toggleLock(fieldId) {
+      const icon = document.getElementById('lock-' + fieldId);
+      const isLocked = icon.classList.contains('bi-lock-fill');
+      icon.classList.toggle('bi-lock-fill', !isLocked);
+      icon.classList.toggle('bi-unlock-fill', isLocked);
+    }
+
+    function isLocked(fieldId) {
+      return document.getElementById('lock-' + fieldId)?.classList.contains('bi-lock-fill');
+    }
+
+    function toggleAngleSelect() {
+      document.getElementById("angle").disabled = !document.getElementById("toggleAngle").checked;
+    }
+
+    function getRandom(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function randomPrompt() {
+      if (!isLocked("character")) document.getElementById("character").value = getRandom(libraries.character);
+      if (!isLocked("pose")) document.getElementById("pose").value = getRandom(libraries.pose);
+      if (!isLocked("outfit")) document.getElementById("outfit").value = getRandom(libraries.outfit);
+      if (!isLocked("scene")) document.getElementById("scene").value = getRandom(libraries.scene);
+      if (!isLocked("style")) document.getElementById("style").value = getRandom(libraries.style);
+      if (!isLocked("quality")) document.getElementById("quality").value = getRandom(libraries.quality);
+      if (document.getElementById("toggleAngle").checked) {
+        document.getElementById("angle").value = getRandom(libraries.angle);
+      }
+      if (!isLocked("negative")) {
+        document.getElementById("negative").value = "(worst quality, low quality, blurry, deformed, extra limbs, mutated hands, missing fingers, bad anatomy, text, logo, watermark)";
+      }
+      generatePrompt();
+    }
+
+    function generatePrompt() {
+      const character = document.getElementById("character").value.trim();
+      const pose = document.getElementById("pose").value.trim();
+      const outfit = document.getElementById("outfit").value.trim();
+      const scene = document.getElementById("scene").value.trim();
+      const style = document.getElementById("style").value.trim();
+      const angle = document.getElementById("toggleAngle").checked ? document.getElementById("angle").value.trim() : "";
+      const quality = document.getElementById("quality").value.trim();
+      const negative = document.getElementById("negative").value.trim();
+
+      const prompt = [character, pose, outfit, scene, style, angle, quality].filter(Boolean).join(", ");
+      document.getElementById("output").value = prompt;
+      document.getElementById("negativeOutput").value = negative;
+    }
+
+    function applyPreset() {
+      const selected = document.getElementById("preset").value;
+      if (presets[selected] && !isLocked("style")) {
+        document.getElementById("style").value = presets[selected];
+      }
+    }
+
+    function copyPrompt() {
+      const output = document.getElementById("output");
+      const negative = document.getElementById("negativeOutput");
+      const fullPrompt = output.value + "\nNegative prompt: " + negative.value;
+      if (!output.value) return;
+      navigator.clipboard.writeText(fullPrompt)
+        .then(() => alert("Prompt copied to clipboard!"))
+        .catch(err => alert("Failed to copy: " + err));
+    }
+  </script>
+
+<div class="divider"></div>
+
+<div id="footer"></div>
+
+</div>
+
+<script src="../../main.js"></script>
+
+</body>
+
+</html>
