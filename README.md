@@ -1,5 +1,7 @@
 # 🌐 @gigend / https://gigend.github.io/
 
+[![MasterHead](docs/assets/images/gigend-banner.png)](https://beacons.ai/gigend)
+
 Ini adalah repository untuk website personal yang dihosting menggunakan **GitHub Pages**.
 
 Website ini dibangun dengan HTML, CSS, dan JavaScript sederhana — untuk profil online, portfolio, atau landing page jasa.
