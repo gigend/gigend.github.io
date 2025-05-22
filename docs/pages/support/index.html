@@ -17,32 +17,6 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
 
-<!-- Swiper CSS-->
-<style>
-  .swiper {
-    border-radius: 12px;
-  }
-    /* Sembunyikan tombol navigasi */
-  .mySwiper .swiper-button-next,
-  .mySwiper .swiper-button-prev {
-    opacity: 0;
-    color: rgba(255, 255, 255, 0.5); /* Ganti dengan warna yang kamu mau */
-    transition: color 0.3s ease, opacity 0.3s ease;
-    pointer-events: none; /* supaya tidak bisa diklik saat tidak terlihat */
-  }
-  /* Munculkan saat hover ke swiper */
-  .mySwiper:hover .swiper-button-next,
-  .mySwiper:hover .swiper-button-prev {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  /* Hover effect (opsional) */
-  .mySwiper .swiper-button-next:hover,
-  .mySwiper .swiper-button-prev:hover {
-    color: rgb(255, 188, 64);
-  }
-</style>
-
 <body>
   <div class="container">
 
@@ -58,7 +32,7 @@
 
 <div class="portfolio-item wow animate__animated animate__fadeIn">
   <a data-fancybox="gallery">
-    <img data-src="../../assets/images/gigend-qr-code.png" class="lazyload portfolio-image" alt="Gigend Workspace QR Code"/>
+    <img data-src="../../assets/images/gigend-qr-code.png" class="lazyload portfolio-image" alt="Gigend Workspace QR Code" data-aspect-ratio="5/7"/>
   </a>
 </div>
 
@@ -72,33 +46,6 @@
 
 <div class="divider"></div>
 
-<!-- Fancybox + Swiper Container
-<div class="swiper mySwiper">
-  <div class="swiper-wrapper">
-
-    <div class="swiper-slide">
-      <a data-fancybox="gallery">
-        <img data-src="https://placehold.co/1280x720/ff00ff/ffffff" class="lazyload portfolio-image" alt="1">
-      </a>
-    </div>
-
-    <div class="swiper-slide">
-      <a data-fancybox="gallery">
-        <img data-src="https://placehold.co/1280x720/ff0000/ffffff" class="lazyload portfolio-image" alt="2">
-      </a>
-    </div>
-
-    <div class="swiper-slide">
-      <a data-fancybox="gallery">
-        <img data-src="https://placehold.co/1280x720/00ff00/000000" class="lazyload portfolio-image" alt="3">
-      </a>
-    </div>
-
-  </div>
-
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
-</div> -->
 
 <div id="footer"></div>
 
@@ -117,19 +64,6 @@
         link.setAttribute("href", imgSrc);
       }
     }
-  });
-</script>
-
-<!-- Init Swiper -->
-<script>
-  const swiper = new Swiper(".mySwiper", {
-    slidesPerView: 1,
-    spaceBetween: 10,
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-    loop: true,
   });
 </script>
 

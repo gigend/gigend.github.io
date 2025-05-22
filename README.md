@@ -50,10 +50,10 @@ Website ini dibangun dengan HTML, CSS, dan JavaScript sederhana — untuk profil
 ## 📝 To-Do List
 
 - [ ] Merapikan Icon / Solid Color Icon
-- [ ] Transisi Darkmode
-- [ ] Membuat Halaman `pages/support.html`
+- [x] Transisi Darkmode
+- [x] Membuat Halaman `pages/support.html`
 - [ ] Membuat Halaman `pages/project-portfolio.html`
-- [ ] Membuat Halaman `pages/price-list.html`
+- [x] Membuat Halaman `pages/price-list.html`
 - [ ] Membuat Animasi Lazyload untuk `images` dan akan muncul setelah terlihat di layar (viewport)
 
 ## 👤 Author

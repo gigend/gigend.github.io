@@ -1,14 +1,14 @@
 function loadElement(id, file, callback) {
   fetch(file)
-    .then(response => {
+    .then((response) => {
       if (!response.ok) throw new Error(`Gagal load ${file}`);
       return response.text();
     })
-    .then(data => {
+    .then((data) => {
       document.getElementById(id).innerHTML = data;
       if (typeof callback === 'function') callback();
     })
-    .catch(error => console.error(error));
+    .catch((error) => console.error(error));
 }
 
 // Navbar Dropdown
@@ -74,8 +74,8 @@ function initAllDropdownButtons() {
       const isVisible = submenu.classList.contains('show');
 
       // Tutup semua yang lain
-      document.querySelectorAll('.sub-buttons').forEach(el => el.classList.remove('show'));
-      document.querySelectorAll('.dropdown-trigger .caret-icon').forEach(i => i.classList.remove('rotate'));
+      document.querySelectorAll('.sub-buttons').forEach((el) => el.classList.remove('show'));
+      document.querySelectorAll('.dropdown-trigger .caret-icon').forEach((i) => i.classList.remove('rotate'));
 
       if (!isVisible) {
         submenu.classList.add('show');
@@ -86,7 +86,7 @@ function initAllDropdownButtons() {
 
   // Klik di luar = tutup semua
   document.addEventListener('click', (e) => {
-    triggers.forEach(trigger => {
+    triggers.forEach((trigger) => {
       const submenu = trigger.nextElementSibling;
       const caret = trigger.querySelector('.caret-icon');
 
@@ -136,16 +136,16 @@ function showLucky(root) {
     document.body.classList.add('dark');
   }
 
-  document.addEventListener("click", function (e) {
-    if (e.target.id === "darkModeToggleNav") {
-      document.body.classList.toggle("dark");
-      localStorage.setItem("darkMode", document.body.classList.contains("dark") ? "enabled" : "disabled");
+  document.addEventListener('click', function (e) {
+    if (e.target.id === 'darkModeToggleNav') {
+      document.body.classList.toggle('dark');
+      localStorage.setItem('darkMode', document.body.classList.contains('dark') ? 'enabled' : 'disabled');
     }
   });
 })();
 
 // Load modular element on DOMContentLoaded
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener('DOMContentLoaded', () => {
   const isInPages = location.pathname.includes('/pages/');
   const isInDocs = location.pathname.includes('/docs/');
   const isLocalFile = location.protocol === 'file:';
@@ -154,20 +154,101 @@ window.addEventListener("DOMContentLoaded", () => {
   const basePath = isLocalFile || isInDocs ? '/docs/' : '/';
 
   // Load navbar
-  loadElement("navbar", basePath + "element/navbar.html", () => {
-    initDropdownNavbar();       // navbar dropdown
+  loadElement('navbar', basePath + 'element/navbar.html', () => {
+    initDropdownNavbar(); // navbar dropdown
     initAllDropdownButtons(); // <- fungsi general baru
   });
 
   // Load footer dan isi logo-nya sesuai path
-  loadElement("footer", basePath + "element/footer.html", () => {
-    const logo = document.getElementById("footer-logo");
+  loadElement('footer', basePath + 'element/footer.html', () => {
+    const logo = document.getElementById('footer-logo');
     if (logo) {
-      logo.src = basePath + "assets/images/gigend-logo-small.png";
+      logo.src = basePath + 'assets/images/gigend-logo-small.png';
     }
   });
 });
 
+// Script untuk auto-set href dari gambar
+document.addEventListener('lazyloaded', function (e) {
+  const img = e.target;
+  const link = img.closest('a[data-fancybox="gallery"]');
+  if (link) {
+    const imgSrc = img.getAttribute('src') || img.getAttribute('data-src');
+    if (imgSrc) {
+      link.setAttribute('href', imgSrc);
+    }
+  }
+});
+
+// Init Swiper
+const swiper = new Swiper('.mySwiper', {
+  slidesPerView: 1,
+  spaceBetween: 10,
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  loop: true,
+});
+
+// Loading Spinner
+document.addEventListener("DOMContentLoaded", () => {
+  const lazyImages = document.querySelectorAll("img.lazyload");
+
+  lazyImages.forEach(img => {
+    const parent = img.closest('.portfolio-item, .swiper-slide');
+    if (!parent) return;
+
+    // Ambil atau tetapkan rasio default
+    let ratio = img.getAttribute("data-aspect-ratio");
+    if (!ratio) {
+      ratio = "16/9";
+      img.setAttribute("data-aspect-ratio", ratio);
+    }
+
+    const [w, h] = ratio.split('/').map(Number);
+    const paddingTop = (h / w) * 100;
+
+    // Buat wrapper
+    const wrapper = document.createElement("div");
+    wrapper.className = "lazy-wrapper";
+    wrapper.style.paddingTop = `${paddingTop}%`;
+
+    // Pindahkan <img> dan <a> ke dalam wrapper
+    const anchor = img.closest("a");
+    if (anchor) {
+      parent.insertBefore(wrapper, anchor);
+      wrapper.appendChild(anchor);
+    } else {
+      parent.insertBefore(wrapper, img);
+      wrapper.appendChild(img);
+    }
+
+    // Tambah spinner
+    const spinner = document.createElement('div');
+    spinner.className = 'spinner';
+    wrapper.appendChild(spinner);
+
+    // Sembunyikan gambar dulu
+    img.style.opacity = '0';
+    img.style.visibility = 'hidden';
+  });
+});
+
+document.addEventListener("lazyloaded", (e) => {
+  const img = e.target;
+  const wrapper = img.closest('.lazy-wrapper');
+  const spinner = wrapper?.querySelector('.spinner');
+
+  // Tampilkan gambar
+  img.style.opacity = '1';
+  img.style.visibility = 'visible';
+
+  // Hilangkan spinner
+  if (spinner) {
+    spinner.classList.add('hide');
+  }
+});
+
 // Reveal CSS animation as you scroll down a page
 new WOW().init();
-
